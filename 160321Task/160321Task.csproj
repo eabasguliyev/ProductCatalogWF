@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="DraggableForm.cs" />
     <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\Rgb.cs" />
     <Compile Include="Enums\OperationType.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

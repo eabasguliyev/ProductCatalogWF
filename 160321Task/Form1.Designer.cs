@@ -34,8 +34,8 @@ namespace _160321Task
             this.ProductCountryLbl = new System.Windows.Forms.Label();
             this.ProductTitleLbl = new System.Windows.Forms.Label();
             this.ProductPcBx = new System.Windows.Forms.PictureBox();
-            this.NoLbl = new System.Windows.Forms.Label();
             this.SelectedPnl = new System.Windows.Forms.Panel();
+            this.NoLbl = new System.Windows.Forms.Label();
             this.ListControlPnl = new System.Windows.Forms.Panel();
             this.ClearBtn = new System.Windows.Forms.Button();
             this.RemoveBtn = new System.Windows.Forms.Button();
@@ -66,9 +66,10 @@ namespace _160321Task
             this.ProductPnl.Controls.Add(this.SelectedPnl);
             this.ProductPnl.Location = new System.Drawing.Point(0, 1);
             this.ProductPnl.Name = "ProductPnl";
-            this.ProductPnl.Size = new System.Drawing.Size(618, 106);
+            this.ProductPnl.Size = new System.Drawing.Size(617, 106);
             this.ProductPnl.TabIndex = 0;
             this.ProductPnl.Visible = false;
+            this.ProductPnl.Click += new System.EventHandler(this.ProductPnl_Click);
             // 
             // ProductPriceLbl
             // 
@@ -102,12 +103,21 @@ namespace _160321Task
             // 
             // ProductPcBx
             // 
+            this.ProductPcBx.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ProductPcBx.BackColor = System.Drawing.Color.White;
-            this.ProductPcBx.Location = new System.Drawing.Point(520, 13);
+            this.ProductPcBx.Location = new System.Drawing.Point(519, 13);
             this.ProductPcBx.Name = "ProductPcBx";
             this.ProductPcBx.Size = new System.Drawing.Size(87, 74);
             this.ProductPcBx.TabIndex = 1;
             this.ProductPcBx.TabStop = false;
+            // 
+            // SelectedPnl
+            // 
+            this.SelectedPnl.Controls.Add(this.NoLbl);
+            this.SelectedPnl.Location = new System.Drawing.Point(13, 22);
+            this.SelectedPnl.Name = "SelectedPnl";
+            this.SelectedPnl.Size = new System.Drawing.Size(67, 63);
+            this.SelectedPnl.TabIndex = 2;
             // 
             // NoLbl
             // 
@@ -118,14 +128,6 @@ namespace _160321Task
             this.NoLbl.Size = new System.Drawing.Size(23, 25);
             this.NoLbl.TabIndex = 0;
             this.NoLbl.Text = "1";
-            // 
-            // SelectedPnl
-            // 
-            this.SelectedPnl.Controls.Add(this.NoLbl);
-            this.SelectedPnl.Location = new System.Drawing.Point(13, 22);
-            this.SelectedPnl.Name = "SelectedPnl";
-            this.SelectedPnl.Size = new System.Drawing.Size(67, 63);
-            this.SelectedPnl.TabIndex = 2;
             // 
             // ListControlPnl
             // 
@@ -153,6 +155,7 @@ namespace _160321Task
             this.ClearBtn.TabIndex = 3;
             this.ClearBtn.Text = "Clear";
             this.ClearBtn.UseVisualStyleBackColor = false;
+            this.ClearBtn.Click += new System.EventHandler(this.ClearBtn_Click);
             // 
             // RemoveBtn
             // 
@@ -166,6 +169,7 @@ namespace _160321Task
             this.RemoveBtn.TabIndex = 2;
             this.RemoveBtn.Text = "Remove";
             this.RemoveBtn.UseVisualStyleBackColor = false;
+            this.RemoveBtn.Click += new System.EventHandler(this.RemoveBtn_Click);
             // 
             // EditBtn
             // 
@@ -237,6 +241,7 @@ namespace _160321Task
             // 
             this.ProductsPnl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ProductsPnl.AutoScroll = true;
             this.ProductsPnl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(173)))), ((int)(((byte)(173)))));
             this.ProductsPnl.Controls.Add(this.ProductPnl);
             this.ProductsPnl.Location = new System.Drawing.Point(-1, 45);

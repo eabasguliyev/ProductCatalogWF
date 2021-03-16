@@ -67,7 +67,35 @@ namespace _160321Task
             if (OperationType == OperationType.Add)
                 ProgramTitleLbl.Text = "Add";
             else if (OperationType == OperationType.Edit)
+            {
                 ProgramTitleLbl.Text = "Edit";
+
+                if (Product != null)
+                {
+                    LoadProductToForm(Product);
+                }
+            }
+        }
+
+        public void RemoveText(TextBox textBox, string text)
+        {
+            if (textBox.Text == "text")
+            {
+                textBox.Text = "";
+            }
+        }
+
+        public void AddText(TextBox textBox, string text)
+        {
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+                textBox.Text = text;
+        }
+
+        private void LoadProductToForm(Product product)
+        {
+            ProductNameTxtBx.Text = product.Name;
+            OriginCountryTxtBx.Text = product.OriginCountry;
+            ProductPriceTxtBx.Text = product.Price.ToString();
         }
     }
 }

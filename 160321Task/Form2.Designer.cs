@@ -31,7 +31,6 @@ namespace _160321Task
         {
             this.ProgramTitleLbl = new System.Windows.Forms.Label();
             this.DraggablePnl = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ProductNameTxtBx = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,6 +39,7 @@ namespace _160321Task
             this.ProductPriceTxtBx = new System.Windows.Forms.TextBox();
             this.OkBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.DraggablePnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -70,27 +70,16 @@ namespace _160321Task
             this.DraggablePnl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DraggablePnl_MouseMove);
             this.DraggablePnl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DraggablePnl_MouseUp);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pictureBox1.Image = global::_160321Task.Properties.Resources.close_window;
-            this.pictureBox1.Location = new System.Drawing.Point(381, 1);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(44, 43);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
             // ProductNameTxtBx
             // 
             this.ProductNameTxtBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.ProductNameTxtBx.Location = new System.Drawing.Point(26, 89);
-            this.ProductNameTxtBx.Multiline = true;
+            this.ProductNameTxtBx.MaxLength = 20;
             this.ProductNameTxtBx.Name = "ProductNameTxtBx";
-            this.ProductNameTxtBx.Size = new System.Drawing.Size(382, 36);
+            this.ProductNameTxtBx.Size = new System.Drawing.Size(382, 34);
             this.ProductNameTxtBx.TabIndex = 3;
-            this.ProductNameTxtBx.Text = "Iphone 12";
+            this.ProductNameTxtBx.Text = "Iphone";
+            this.ProductNameTxtBx.WordWrap = false;
             // 
             // label1
             // 
@@ -116,11 +105,12 @@ namespace _160321Task
             // 
             this.OriginCountryTxtBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.OriginCountryTxtBx.Location = new System.Drawing.Point(26, 172);
-            this.OriginCountryTxtBx.Multiline = true;
+            this.OriginCountryTxtBx.MaxLength = 20;
             this.OriginCountryTxtBx.Name = "OriginCountryTxtBx";
-            this.OriginCountryTxtBx.Size = new System.Drawing.Size(382, 36);
+            this.OriginCountryTxtBx.Size = new System.Drawing.Size(382, 34);
             this.OriginCountryTxtBx.TabIndex = 5;
             this.OriginCountryTxtBx.Text = "USA";
+            this.OriginCountryTxtBx.WordWrap = false;
             // 
             // label3
             // 
@@ -136,11 +126,12 @@ namespace _160321Task
             // 
             this.ProductPriceTxtBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.ProductPriceTxtBx.Location = new System.Drawing.Point(25, 254);
-            this.ProductPriceTxtBx.Multiline = true;
+            this.ProductPriceTxtBx.MaxLength = 10;
             this.ProductPriceTxtBx.Name = "ProductPriceTxtBx";
-            this.ProductPriceTxtBx.Size = new System.Drawing.Size(382, 36);
+            this.ProductPriceTxtBx.Size = new System.Drawing.Size(382, 34);
             this.ProductPriceTxtBx.TabIndex = 7;
-            this.ProductPriceTxtBx.Text = "0";
+            this.ProductPriceTxtBx.Text = "1000";
+            this.ProductPriceTxtBx.WordWrap = false;
             // 
             // OkBtn
             // 
@@ -170,10 +161,24 @@ namespace _160321Task
             this.CancelBtn.UseVisualStyleBackColor = false;
             this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pictureBox1.Image = global::_160321Task.Properties.Resources.close_window;
+            this.pictureBox1.Location = new System.Drawing.Point(381, 1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(44, 43);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // Form2
             // 
+            this.AcceptButton = this.OkBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.CancelBtn;
             this.ClientSize = new System.Drawing.Size(433, 370);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.OkBtn);
@@ -186,7 +191,7 @@ namespace _160321Task
             this.Controls.Add(this.DraggablePnl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form2";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Load += new System.EventHandler(this.Form2_Load);
             this.DraggablePnl.ResumeLayout(false);
             this.DraggablePnl.PerformLayout();

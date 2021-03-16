@@ -5,5 +5,13 @@
         public string Name { get; set; }
         public string OriginCountry { get; set; }
         public double Price { get; set; }
+
+
+        public void UpdateProduct(Product product)
+        {
+            this.Name = product.Name;
+            this.OriginCountry = product.OriginCountry;
+            this.Price = product.Price;
+        }
     }
 }
