@@ -40,6 +40,9 @@ namespace _160321Task
             this.OkBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ImagePathTxtBx = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.DraggablePnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -139,7 +142,7 @@ namespace _160321Task
             this.OkBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.OkBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.OkBtn.ForeColor = System.Drawing.Color.White;
-            this.OkBtn.Location = new System.Drawing.Point(27, 307);
+            this.OkBtn.Location = new System.Drawing.Point(25, 378);
             this.OkBtn.Name = "OkBtn";
             this.OkBtn.Size = new System.Drawing.Size(129, 46);
             this.OkBtn.TabIndex = 9;
@@ -150,10 +153,11 @@ namespace _160321Task
             // CancelBtn
             // 
             this.CancelBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(36)))), ((int)(((byte)(48)))));
+            this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.CancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CancelBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.CancelBtn.ForeColor = System.Drawing.Color.White;
-            this.CancelBtn.Location = new System.Drawing.Point(268, 307);
+            this.CancelBtn.Location = new System.Drawing.Point(269, 378);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(139, 46);
             this.CancelBtn.TabIndex = 10;
@@ -173,13 +177,41 @@ namespace _160321Task
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // ImagePathTxtBx
+            // 
+            this.ImagePathTxtBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.ImagePathTxtBx.Location = new System.Drawing.Point(25, 334);
+            this.ImagePathTxtBx.MaxLength = 10;
+            this.ImagePathTxtBx.Name = "ImagePathTxtBx";
+            this.ImagePathTxtBx.ReadOnly = true;
+            this.ImagePathTxtBx.Size = new System.Drawing.Size(382, 34);
+            this.ImagePathTxtBx.TabIndex = 11;
+            this.ImagePathTxtBx.WordWrap = false;
+            this.ImagePathTxtBx.Click += new System.EventHandler(this.ImagePathTxtBx_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.label4.Location = new System.Drawing.Point(23, 306);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 24);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Image:";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form2
             // 
             this.AcceptButton = this.OkBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(433, 370);
+            this.ClientSize = new System.Drawing.Size(433, 439);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.ImagePathTxtBx);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.OkBtn);
             this.Controls.Add(this.label3);
@@ -214,5 +246,8 @@ namespace _160321Task
         private System.Windows.Forms.TextBox ProductPriceTxtBx;
         private System.Windows.Forms.Button OkBtn;
         private System.Windows.Forms.Button CancelBtn;
+        private System.Windows.Forms.TextBox ImagePathTxtBx;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using _160321Task.Entities;
 using _160321Task.Enums;
+using _160321Task.Helpers;
 
 namespace _160321Task
 {
@@ -12,11 +15,37 @@ namespace _160321Task
         public List<Product> Products { get; set; }
 
         public Panel SelectedProductPanel { get; set; }
+
         //public static int ProductCont = 0;
         public Form1()
         {
             InitializeComponent();
-            Products = new List<Product>();
+
+            FileHelper.FileName = "Products.json";
+
+            if (File.Exists(FileHelper.FileName))
+            {
+                Products = FileHelper.ReadFromJson();
+
+
+                if(Products != null)
+                {
+                    for (int i = 0; i < Products.Count; i++)
+                    {
+                        var productPanel = CreateNewProductPanel(i);
+
+                        FillProductToProductPanel(Products[i], productPanel);
+                    }
+                }
+                else
+                { 
+                    Products = new List<Product>();
+                }
+            }
+            else
+                Products = new List<Product>();
+
+
         }
 
         private void DraggablePnl_MouseDown(object sender, MouseEventArgs e)
@@ -52,11 +81,14 @@ namespace _160321Task
                 return;
 
             Products.Add(form2.Product);
-
             var newProductPanel = CreateNewProductPanel(Products.Count - 1);
 
             FillProductToProductPanel(form2.Product, newProductPanel);
 
+            FileHelper.WriteToJson(Products);
+            
+            if (!ClearBtn.Enabled)
+                ClearBtn.Enabled = true;
         }
 
         private Panel CreateNewProductPanel(int productNo)
@@ -67,8 +99,10 @@ namespace _160321Task
             productPanel.Size = new Size(464, 86);
             productPanel.Name = $"ProductPnl{productNo}";
             productPanel.Tag = productNo;
-            productPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                                                                        | System.Windows.Forms.AnchorStyles.Right)));
+            productPanel.Anchor =
+                ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top |
+                                                        System.Windows.Forms.AnchorStyles.Left)
+                                                       | System.Windows.Forms.AnchorStyles.Right)));
             productPanel.Click += ProductPnl_Click;
 
             var selectedPanel = new Panel();
@@ -96,7 +130,7 @@ namespace _160321Task
             productTitleLbl.Size = new Size(51, 20);
             productTitleLbl.AutoSize = true;
             productTitleLbl.Name = $"ProductTitleLbl{productNo}";
-            
+
             productPanel.Controls.Add(productTitleLbl);
 
             var productCountryLbl = new Label();
@@ -114,7 +148,7 @@ namespace _160321Task
             productPriceLbl.Font = new Font("Microsoft Sans Serif", 12);
             productPriceLbl.Location = new Point(73, 58);
             productPriceLbl.AutoSize = true;
-            productPriceLbl.Name= $"ProductPriceLbl{productNo}";
+            productPriceLbl.Name = $"ProductPriceLbl{productNo}";
 
 
             productPanel.Controls.Add(productPriceLbl);
@@ -144,6 +178,11 @@ namespace _160321Task
         private void Form1_Load(object sender, EventArgs e)
         {
             ProductPnl.Dispose();
+            ClearButtonTexts();
+
+            DisableButtonsUseability();
+
+            ClearBtn.Enabled = (Products.Count != 0);
         }
 
         private void EditBtn_Click(object sender, EventArgs e)
@@ -162,6 +201,7 @@ namespace _160321Task
 
             product.UpdateProduct(form2.Product);
             FillProductToProductPanel(product, SelectedProductPanel);
+            FileHelper.WriteToJson(Products);
         }
 
         private Panel GetProductPanel(int tag)
@@ -169,7 +209,7 @@ namespace _160321Task
             foreach (Control productPanel in ProductsPnl.Controls)
             {
                 if ((int) productPanel.Tag == tag)
-                    return (Panel)productPanel;
+                    return (Panel) productPanel;
             }
 
             throw new InvalidOperationException($"There is no product panel associated this tag -> {tag}");
@@ -183,6 +223,13 @@ namespace _160321Task
             productPanel.Controls[$"ProductTitleLbl{tag}"].Text = product.Name;
             productPanel.Controls[$"ProductCountryLbl{tag}"].Text = product.OriginCountry;
             productPanel.Controls[$"ProductPriceLbl{tag}"].Text = $"{product.Price} usd";
+
+            if (product.ImageBitmap != null)
+            {
+                var image = productPanel.Controls[$"ProductPcBx{tag}"] as PictureBox;
+
+                image.Image = (Image)product.ImageBitmap;
+            }
         }
 
         private void ProductPnl_Click(object sender, EventArgs e)
@@ -199,21 +246,23 @@ namespace _160321Task
 
             ChangeColorSelectedPanel(newSelectedPanel, new Rgb(47, 57, 77), Color.White);
             SelectedProductPanel = newSelectedPanel;
+            EnableButtonsUseability();
         }
 
         private void ChangeColorSelectedPanel(Panel panel, Rgb panelColor, Color lblColor)
         {
-            var tag = (int)panel.Tag;
+            var tag = (int) panel.Tag;
             var selectedPnl = panel.Controls[$"SelectedPnl{tag}"] as Panel;
-                
+
             selectedPnl.BackColor = Color.FromArgb(panelColor.Red, panelColor.Green, panelColor.Blue);
-            selectedPnl.Controls[$"NoLbl{tag}"].BackColor = Color.FromArgb(panelColor.Red, panelColor.Green, panelColor.Blue);
+            selectedPnl.Controls[$"NoLbl{tag}"].BackColor =
+                Color.FromArgb(panelColor.Red, panelColor.Green, panelColor.Blue);
             selectedPnl.Controls[$"NoLbl{tag}"].ForeColor = lblColor;
         }
 
         private void UpdateProductNo(Panel productPanel, int panelNo)
         {
-            var tag = (int)productPanel.Tag;
+            var tag = (int) productPanel.Tag;
 
             productPanel.Controls[$"SelectedPnl{tag}"].Controls[$"NoLbl{tag}"].Text = panelNo.ToString();
         }
@@ -221,11 +270,7 @@ namespace _160321Task
         private void RemoveBtn_Click(object sender, EventArgs e)
         {
             var panelIndex = GetPanelIndex(SelectedProductPanel);
-            //var productIndex = panelIndex - 1; // because one panel created before;
 
-            // 1
-            // 2
-            // 3
             if (panelIndex != ProductsPnl.Controls.Count - 1)
             {
                 var currentPanelLocation = SelectedProductPanel.Location;
@@ -245,6 +290,11 @@ namespace _160321Task
             SelectedProductPanel.Dispose();
             Products.RemoveAt(panelIndex);
             SelectedProductPanel = null;
+            DisableButtonsUseability();
+            FileHelper.WriteToJson(Products);
+
+            if (Products.Count == 0)
+                ClearBtn.Enabled = false;
         }
 
         private int GetPanelIndex(Panel panel)
@@ -255,7 +305,7 @@ namespace _160321Task
                     return i;
             }
 
-            throw new InvalidOperationException($"There is no panel associated this tag -> {(int)panel.Tag}");
+            throw new InvalidOperationException($"There is no panel associated this tag -> {(int) panel.Tag}");
         }
 
         private void ClearBtn_Click(object sender, EventArgs e)
@@ -263,16 +313,105 @@ namespace _160321Task
             ProductsPnl.Controls.Clear();
             Products.Clear();
             SelectedProductPanel = null;
+            DisableButtonsUseability();
+            ClearBtn.Enabled = !ClearBtn.Enabled;
+            FileHelper.WriteToJson(Products);
         }
 
-        private void DefaultButtonStates()
+        private void DisableButtonsUseability()
         {
-            // to do: disable edit, remove, clear buttons
+            EditBtn.Enabled = false;
+            RemoveBtn.Enabled = false;
+            //ClearBtn.Enabled = false;
         }
+        private void EnableButtonsUseability()
+        {
+            EditBtn.Enabled = true;
+            RemoveBtn.Enabled = true;
+            //ClearBtn.Enabled = false;
+        }
+
         private void SetForm2StartLocation(Form form2)
         {
-            form2.Location = new Point(this.Location.X + this.Size.Width, 
+            form2.Location = new Point(this.Location.X + this.Size.Width,
                 this.Location.Y + (this.Size.Height - form2.Size.Height));
+        }
+
+        private void ChangeListControlView(int x, int width)
+        {
+            var newLocation = ListControlPnl.Location;
+            var newSize = ListControlPnl.Size;
+
+            newLocation.X = x;
+            newSize.Width = width;
+
+            ListControlPnl.Location = newLocation;
+            ListControlPnl.Size = newSize;
+        }
+
+        private void ChangeProductsListView(int width)
+        {
+            var newSize = ProductsPnl.Size;
+
+            newSize.Width = width;
+
+            ProductsPnl.Size = newSize;
+        }
+        private void ClearButtonTexts()
+        {
+            AddBtn.Text = string.Empty;
+            EditBtn.Text = string.Empty;
+            RemoveBtn.Text = string.Empty;
+            ClearBtn.Text = string.Empty;
+        }
+
+        private void SetButtonTexts()
+        {
+            AddBtn.Text = "Add";
+            EditBtn.Text = "Edit";
+            RemoveBtn.Text = "Remove";
+            ClearBtn.Text = "Clear";
+        }
+
+        private void ListControlPnl_MouseEnter(object sender, EventArgs e)
+        {
+            ChangeListControlView(462, 138);
+            ChangeProductsListView(463);
+            SetButtonTexts();
+        }
+
+        private void ListControlPnl_MouseLeave(object sender, EventArgs e)
+        {
+            var mousePosition = GetMousePosition();
+
+            if (mousePosition.X >= ListControlPnl.Location.X &&
+                mousePosition.X <= ListControlPnl.Location.X + ListControlPnl.Width &&
+                mousePosition.Y >= ListControlPnl.Location.Y &&
+                mousePosition.Y <= ListControlPnl.Location.Y + ListControlPnl.Height)
+                return;
+
+            ChangeListControlView(544, 56);
+            ChangeProductsListView(545);
+            ClearButtonTexts();
+        }
+
+        private Point GetMousePosition()
+        {
+            return new Point()
+            {
+                X = Control.MousePosition.X - this.Location.X - 8,
+                Y = Control.MousePosition.Y - this.Location.Y - 30,
+            };
+        }
+
+        private void pictureBox1_MouseEnter(object sender, EventArgs e)
+        {
+            pictureBox1.Image = Properties.Resources.red_close_window;
+        }
+
+        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox1.Image = Properties.Resources.close_window;
         }
     }
 }

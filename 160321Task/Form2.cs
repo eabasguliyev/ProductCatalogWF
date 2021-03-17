@@ -53,6 +53,9 @@ namespace _160321Task
             Product.Name = ProductNameTxtBx.Text;
             Product.OriginCountry = OriginCountryTxtBx.Text;
             Product.Price = Convert.ToDouble(ProductPriceTxtBx.Text);
+            
+            if(!string.IsNullOrWhiteSpace(ImagePathTxtBx.Text))
+                Product.ImageBitmap = (Bitmap)Image.FromFile(ImagePathTxtBx.Text);
 
             this.DialogResult = DialogResult.OK;
         }
@@ -96,6 +99,32 @@ namespace _160321Task
             ProductNameTxtBx.Text = product.Name;
             OriginCountryTxtBx.Text = product.OriginCountry;
             ProductPriceTxtBx.Text = product.Price.ToString();
+        }
+
+        private void ImagePathTxtBx_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            {
+                InitialDirectory = @"D:\",
+                Title = "Select Product Image",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                DefaultExt = "txt",
+                Filter = "Images (*.BMP;*.JPG;*.GIF,*.PNG,*.TIFF)|*.BMP;*.JPG;*.GIF;*.PNG;*.TIFF|" + 
+                         "All files (*.*)|*.*",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                ImagePathTxtBx.Text = openFileDialog1.FileName;
+            }
         }
     }
 }
