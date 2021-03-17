@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using _160321Task.Entities;
 using _160321Task.Enums;
+using _160321Task.Helpers;
 
 namespace _160321Task
 {
@@ -53,9 +54,13 @@ namespace _160321Task
             Product.Name = ProductNameTxtBx.Text;
             Product.OriginCountry = OriginCountryTxtBx.Text;
             Product.Price = Convert.ToDouble(ProductPriceTxtBx.Text);
-            
-            if(!string.IsNullOrWhiteSpace(ImagePathTxtBx.Text))
-                Product.ImageBitmap = (Bitmap)Image.FromFile(ImagePathTxtBx.Text);
+
+            if (!string.IsNullOrWhiteSpace(ImagePathTxtBx.Text))
+            {
+                Product.Image = Image.FromFile(ImagePathTxtBx.Text);
+                Product.ImageBytes = ImageHelper.ConvertImageToBytes(Product.Image);
+            }
+
 
             this.DialogResult = DialogResult.OK;
         }
@@ -125,6 +130,16 @@ namespace _160321Task
             {
                 ImagePathTxtBx.Text = openFileDialog1.FileName;
             }
+        }
+
+        private void pictureBox1_MouseEnter(object sender, EventArgs e)
+        {
+            pictureBox1.Image = Properties.Resources.red_close_window;
+        }
+
+        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox1.Image = Properties.Resources.close_window;
         }
     }
 }

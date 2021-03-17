@@ -34,6 +34,7 @@ namespace _160321Task
                     {
                         var productPanel = CreateNewProductPanel(i);
 
+                        SetProductImage(Products[i]);
                         FillProductToProductPanel(Products[i], productPanel);
                     }
                 }
@@ -45,9 +46,15 @@ namespace _160321Task
             else
                 Products = new List<Product>();
 
-
         }
 
+        private void SetProductImage(Product product)
+        {
+            if (product.ImageBytes == null)
+                return;
+
+            product.Image = ImageHelper.ConvertBytesToImage(product.ImageBytes);
+        }
         private void DraggablePnl_MouseDown(object sender, MouseEventArgs e)
         {
             DraggableForm.MouseDown(Cursor.Position, this.Location);
@@ -194,7 +201,6 @@ namespace _160321Task
             var productNo = (int) SelectedProductPanel.Tag;
             var product = Products[productNo];
 
-
             form2.Product = product;
 
             form2.ShowDialog();
@@ -216,6 +222,32 @@ namespace _160321Task
 
         }
 
+        private void UpdateAllObjectProperties()
+        {
+            for (int i = 0; i < ProductsPnl.Controls.Count; i++)
+            {
+                var productPanel = ProductsPnl.Controls[i];
+
+                var oldTag = (int)productPanel.Tag;
+                productPanel.Controls[$"SelectedPnl{oldTag}"].Tag = i;
+                productPanel.Controls[$"SelectedPnl{oldTag}"].Name = $"SelectedPnl{i}";
+
+                productPanel.Controls[$"SelectedPnl{i}"].Controls[$"NoLbl{oldTag}"].Tag = i;
+                productPanel.Controls[$"SelectedPnl{i}"].Controls[$"NoLbl{oldTag}"].Name = $"NoLbl{i}";
+
+                productPanel.Controls[$"ProductTitleLbl{oldTag}"].Tag = i;
+                productPanel.Controls[$"ProductTitleLbl{oldTag}"].Name = $"ProductTitleLbl{i}";
+                productPanel.Controls[$"ProductCountryLbl{oldTag}"].Tag = i;
+                productPanel.Controls[$"ProductCountryLbl{oldTag}"].Name = $"ProductCountryLbl{i}";
+                productPanel.Controls[$"ProductPriceLbl{oldTag}"].Tag = i;
+                productPanel.Controls[$"ProductPriceLbl{oldTag}"].Name = $"ProductPriceLbl{i}";
+                productPanel.Controls[$"ProductPcBx{oldTag}"].Tag = i;
+                productPanel.Controls[$"ProductPcBx{oldTag}"].Name = $"ProductPcBx{i}";
+
+                productPanel.Tag = i;
+                productPanel.Name = $"ProductPnl{i}";
+            }
+        }
         private void FillProductToProductPanel(Product product, Panel productPanel)
         {
             var tag = (int) productPanel.Tag;
@@ -224,11 +256,11 @@ namespace _160321Task
             productPanel.Controls[$"ProductCountryLbl{tag}"].Text = product.OriginCountry;
             productPanel.Controls[$"ProductPriceLbl{tag}"].Text = $"{product.Price} usd";
 
-            if (product.ImageBitmap != null)
+            if (product.Image != null)
             {
                 var image = productPanel.Controls[$"ProductPcBx{tag}"] as PictureBox;
 
-                image.Image = (Image)product.ImageBitmap;
+                image.Image = product.Image;
             }
         }
 
@@ -295,6 +327,8 @@ namespace _160321Task
 
             if (Products.Count == 0)
                 ClearBtn.Enabled = false;
+
+            UpdateAllObjectProperties();
         }
 
         private int GetPanelIndex(Panel panel)

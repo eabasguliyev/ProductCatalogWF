@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
+using Newtonsoft.Json;
 
 namespace _160321Task.Entities
 {
@@ -7,8 +9,10 @@ namespace _160321Task.Entities
         public string Name { get; set; }
         public string OriginCountry { get; set; }
         public double Price { get; set; }
-        public Bitmap ImageBitmap { get; set; }
+        [JsonIgnore]
+        public Image Image { get; set; }
 
+        public Byte[] ImageBytes { get; set; }
 
         public void UpdateProduct(Product product)
         {

@@ -31,6 +31,7 @@ namespace _160321Task
         {
             this.ProgramTitleLbl = new System.Windows.Forms.Label();
             this.DraggablePnl = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ProductNameTxtBx = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,7 +40,6 @@ namespace _160321Task
             this.ProductPriceTxtBx = new System.Windows.Forms.TextBox();
             this.OkBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ImagePathTxtBx = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -72,6 +72,20 @@ namespace _160321Task
             this.DraggablePnl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DraggablePnl_MouseDown);
             this.DraggablePnl.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DraggablePnl_MouseMove);
             this.DraggablePnl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DraggablePnl_MouseUp);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.pictureBox1.Image = global::_160321Task.Properties.Resources.close_window;
+            this.pictureBox1.Location = new System.Drawing.Point(381, 1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(44, 43);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.MouseEnter += new System.EventHandler(this.pictureBox1_MouseEnter);
+            this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
             // 
             // ProductNameTxtBx
             // 
@@ -164,18 +178,6 @@ namespace _160321Task
             this.CancelBtn.Text = "Cancel";
             this.CancelBtn.UseVisualStyleBackColor = false;
             this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pictureBox1.Image = global::_160321Task.Properties.Resources.close_window;
-            this.pictureBox1.Location = new System.Drawing.Point(381, 1);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(44, 43);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // ImagePathTxtBx
             // 
