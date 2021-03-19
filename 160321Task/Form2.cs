@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using _160321Task.Entities;
 using _160321Task.Enums;
@@ -47,7 +48,10 @@ namespace _160321Task
         private void OkBtn_Click(object sender, EventArgs e)
         {
             if (!CheckUserInputs())
+            {
+                MessageBox.Show("Check inputs!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
 
             Product = new Product();
 
@@ -65,9 +69,35 @@ namespace _160321Task
             this.DialogResult = DialogResult.OK;
         }
 
+
         private bool CheckUserInputs()
         {
-            return true;
+            var status = true;
+
+            if (String.IsNullOrWhiteSpace(ProductNameTxtBx.Text))
+            {
+
+                status = false;
+            }
+
+            if (String.IsNullOrWhiteSpace(OriginCountryTxtBx.Text))
+            {
+                status = false;
+            }
+            
+            if (String.IsNullOrWhiteSpace(ProductPriceTxtBx.Text))
+            {
+                status = false;
+            }
+            else if (!Regex.IsMatch(ProductPriceTxtBx.Text, "^[1-9]"))
+            {
+                status = false;
+                ProductPriceStatusLbl.Text = "Product price must be numeric value!";
+                ProductPriceStatusLbl.Visible = true;
+            }
+            else
+                ProductPriceStatusLbl.Visible = false;
+            return status;
         }
 
         private void Form2_Load(object sender, EventArgs e)

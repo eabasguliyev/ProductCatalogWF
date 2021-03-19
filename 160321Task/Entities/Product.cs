@@ -19,6 +19,8 @@ namespace _160321Task.Entities
             this.Name = product.Name;
             this.OriginCountry = product.OriginCountry;
             this.Price = product.Price;
+            this.Image = product.Image;
+            this.ImageBytes = product.ImageBytes;
         }
     }
 }

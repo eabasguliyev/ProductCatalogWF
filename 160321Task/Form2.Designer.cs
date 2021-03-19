@@ -43,6 +43,7 @@ namespace _160321Task
             this.ImagePathTxtBx = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.ProductPriceStatusLbl = new System.Windows.Forms.Label();
             this.DraggablePnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -95,7 +96,6 @@ namespace _160321Task
             this.ProductNameTxtBx.Name = "ProductNameTxtBx";
             this.ProductNameTxtBx.Size = new System.Drawing.Size(382, 34);
             this.ProductNameTxtBx.TabIndex = 3;
-            this.ProductNameTxtBx.Text = "Iphone";
             this.ProductNameTxtBx.WordWrap = false;
             // 
             // label1
@@ -126,7 +126,6 @@ namespace _160321Task
             this.OriginCountryTxtBx.Name = "OriginCountryTxtBx";
             this.OriginCountryTxtBx.Size = new System.Drawing.Size(382, 34);
             this.OriginCountryTxtBx.TabIndex = 5;
-            this.OriginCountryTxtBx.Text = "USA";
             this.OriginCountryTxtBx.WordWrap = false;
             // 
             // label3
@@ -147,7 +146,6 @@ namespace _160321Task
             this.ProductPriceTxtBx.Name = "ProductPriceTxtBx";
             this.ProductPriceTxtBx.Size = new System.Drawing.Size(382, 34);
             this.ProductPriceTxtBx.TabIndex = 7;
-            this.ProductPriceTxtBx.Text = "1000";
             this.ProductPriceTxtBx.WordWrap = false;
             // 
             // OkBtn
@@ -156,7 +154,7 @@ namespace _160321Task
             this.OkBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.OkBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.OkBtn.ForeColor = System.Drawing.Color.White;
-            this.OkBtn.Location = new System.Drawing.Point(25, 378);
+            this.OkBtn.Location = new System.Drawing.Point(25, 400);
             this.OkBtn.Name = "OkBtn";
             this.OkBtn.Size = new System.Drawing.Size(129, 46);
             this.OkBtn.TabIndex = 9;
@@ -171,7 +169,7 @@ namespace _160321Task
             this.CancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CancelBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.CancelBtn.ForeColor = System.Drawing.Color.White;
-            this.CancelBtn.Location = new System.Drawing.Point(269, 378);
+            this.CancelBtn.Location = new System.Drawing.Point(269, 400);
             this.CancelBtn.Name = "CancelBtn";
             this.CancelBtn.Size = new System.Drawing.Size(139, 46);
             this.CancelBtn.TabIndex = 10;
@@ -182,7 +180,7 @@ namespace _160321Task
             // ImagePathTxtBx
             // 
             this.ImagePathTxtBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.ImagePathTxtBx.Location = new System.Drawing.Point(25, 334);
+            this.ImagePathTxtBx.Location = new System.Drawing.Point(25, 356);
             this.ImagePathTxtBx.MaxLength = 10;
             this.ImagePathTxtBx.Name = "ImagePathTxtBx";
             this.ImagePathTxtBx.ReadOnly = true;
@@ -195,7 +193,7 @@ namespace _160321Task
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label4.Location = new System.Drawing.Point(23, 306);
+            this.label4.Location = new System.Drawing.Point(23, 328);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 24);
             this.label4.TabIndex = 12;
@@ -205,13 +203,26 @@ namespace _160321Task
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // ProductPriceStatusLbl
+            // 
+            this.ProductPriceStatusLbl.AutoSize = true;
+            this.ProductPriceStatusLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.ProductPriceStatusLbl.ForeColor = System.Drawing.Color.Red;
+            this.ProductPriceStatusLbl.Location = new System.Drawing.Point(25, 293);
+            this.ProductPriceStatusLbl.Name = "ProductPriceStatusLbl";
+            this.ProductPriceStatusLbl.Size = new System.Drawing.Size(60, 24);
+            this.ProductPriceStatusLbl.TabIndex = 13;
+            this.ProductPriceStatusLbl.Text = "Status";
+            this.ProductPriceStatusLbl.Visible = false;
+            // 
             // Form2
             // 
             this.AcceptButton = this.OkBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(433, 439);
+            this.ClientSize = new System.Drawing.Size(433, 459);
+            this.Controls.Add(this.ProductPriceStatusLbl);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.ImagePathTxtBx);
             this.Controls.Add(this.CancelBtn);
@@ -251,5 +262,6 @@ namespace _160321Task
         private System.Windows.Forms.TextBox ImagePathTxtBx;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label ProductPriceStatusLbl;
     }
 }
