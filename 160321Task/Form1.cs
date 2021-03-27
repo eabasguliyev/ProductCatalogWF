@@ -21,6 +21,7 @@ namespace _160321Task
         {
             InitializeComponent();
 
+
             FileHelper.FileName = "Products.json";
 
             if (File.Exists(FileHelper.FileName))
@@ -30,6 +31,9 @@ namespace _160321Task
 
                 if(Products != null)
                 {
+                    ChangeListControlView(462, 138);
+                    ChangeProductsListView(463);
+
                     for (int i = 0; i < Products.Count; i++)
                     {
                         var productPanel = CreateNewProductPanel(i);
@@ -37,6 +41,9 @@ namespace _160321Task
                         SetProductImage(Products[i]);
                         FillProductToProductPanel(Products[i], productPanel);
                     }
+
+                    ChangeListControlView(544, 56);
+                    ChangeProductsListView(545);
                 }
                 else
                 { 
@@ -161,19 +168,13 @@ namespace _160321Task
             productPanel.Controls.Add(productPriceLbl);
 
             var productImagePcBx = new PictureBox();
-
-            var newLocation = new Point(0, 11)
-            {
-                X = ProductsPnl.Height > (Products.Count - 1) * ProductPnl.Height ? 390 : 373
-            };
-
-
-            productImagePcBx.Location = newLocation;
+            
+            productImagePcBx.Location = new Point(390, 11);
             productImagePcBx.Size = new Size(65, 60);
-            productImagePcBx.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            productImagePcBx.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             productImagePcBx.BackColor = Color.White;
             productImagePcBx.Name = $"ProductPcBx{productNo}";
-            productImagePcBx.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            productImagePcBx.Anchor = AnchorStyles.Right;
 
             productPanel.Controls.Add(productImagePcBx);
             ProductsPnl.Controls.Add(productPanel);
@@ -190,6 +191,9 @@ namespace _160321Task
             DisableButtonsUseability();
 
             ClearBtn.Enabled = (Products.Count != 0);
+
+            //MessageBox.Show($"{ProductsPnl.Size}");
+            //545,414
         }
 
         private void EditBtn_Click(object sender, EventArgs e)
@@ -410,6 +414,7 @@ namespace _160321Task
         private void ListControlPnl_MouseEnter(object sender, EventArgs e)
         {
             ChangeListControlView(462, 138);
+            //545,414
             ChangeProductsListView(463);
             SetButtonTexts();
         }
